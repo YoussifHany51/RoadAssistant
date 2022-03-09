@@ -9,9 +9,22 @@ import SwiftUI
 
 @main
 struct RoadAssistantApp: App {
+    
+    @StateObject private var vm = LocationViewModel()
+    
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+//            LocationView()
+//                .environmentObject(vm)
+//                .onAppear{
+//                    UserDefaults.standard.set(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
+//                }
+            HomeScreen()
+                .environmentObject(vm)
+                .onAppear{
+                    UserDefaults.standard.set(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
+                }
         }
     }
 }

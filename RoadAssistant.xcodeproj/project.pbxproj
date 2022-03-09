@@ -7,18 +7,64 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0957120727D3A48900FED3FA /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0957120627D3A48900FED3FA /* HomeScreen.swift */; };
+		0957120927D3D1F500FED3FA /* AdminView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0957120827D3D1F500FED3FA /* AdminView.swift */; };
+		0957120B27D3D81500FED3FA /* KeyBoardHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0957120A27D3D81500FED3FA /* KeyBoardHandler.swift */; };
+		0985E84527CFB9A2000F8ACC /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0985E84427CFB9A2000F8ACC /* SoundManager.swift */; };
+		0985E84827CFBBE2000F8ACC /* ding.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0985E84727CFBBE2000F8ACC /* ding.mp3 */; };
+		0985E84A27CFE299000F8ACC /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0985E84927CFE299000F8ACC /* InfoView.swift */; };
 		0996CDCD27C8FF5200B0DA51 /* RoadAssistantApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0996CDCC27C8FF5200B0DA51 /* RoadAssistantApp.swift */; };
-		0996CDCF27C8FF5200B0DA51 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0996CDCE27C8FF5200B0DA51 /* ContentView.swift */; };
 		0996CDD127C8FF5300B0DA51 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0996CDD027C8FF5300B0DA51 /* Assets.xcassets */; };
 		0996CDD427C8FF5300B0DA51 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0996CDD327C8FF5300B0DA51 /* Preview Assets.xcassets */; };
+		0996CDDF27C9005D00B0DA51 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0996CDDE27C9005C00B0DA51 /* Location.swift */; };
+		0996CDE127C9009D00B0DA51 /* LocationsDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0996CDE027C9009D00B0DA51 /* LocationsDataService.swift */; };
+		0996CDE327C900F800B0DA51 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0996CDE227C900F800B0DA51 /* LocationViewModel.swift */; };
+		0996CDE527C9012B00B0DA51 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0996CDE427C9012B00B0DA51 /* LocationView.swift */; };
+		0996CDE727C9015E00B0DA51 /* LocationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0996CDE627C9015E00B0DA51 /* LocationDetailView.swift */; };
+		0996CDE927C9018400B0DA51 /* LocationsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0996CDE827C9018400B0DA51 /* LocationsListView.swift */; };
+		0996CDEB27C901B000B0DA51 /* LocationPerviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0996CDEA27C901B000B0DA51 /* LocationPerviewView.swift */; };
+		0996CDED27C901D500B0DA51 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0996CDEC27C901D500B0DA51 /* AnnotationView.swift */; };
+		0996CDF127C925DA00B0DA51 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0996CDF027C925DA00B0DA51 /* CameraView.swift */; };
+		0996CDF327C928BA00B0DA51 /* Picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0996CDF227C928BA00B0DA51 /* Picker.swift */; };
+		0996CDF627C92D2D00B0DA51 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0996CDF527C92D2D00B0DA51 /* ImagePicker.swift */; };
+		0996CDF827C92D7200B0DA51 /* ZoomableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0996CDF727C92D7200B0DA51 /* ZoomableScrollView.swift */; };
+		099E6E4127CC0DF900877758 /* MyImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099E6E4027CC0DF800877758 /* MyImage.swift */; };
+		099E6E4427CC0E8100877758 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099E6E4327CC0E8100877758 /* FileManager.swift */; };
+		099E6E4627CC0F1100877758 /* MyImagesError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099E6E4527CC0F1100877758 /* MyImagesError.swift */; };
+		099E6E4827CC118800877758 /* CameraButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099E6E4727CC118800877758 /* CameraButtonView.swift */; };
+		09EE61AB27D56B2A002E53FF /* AdminAllDefectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EE61AA27D56B2A002E53FF /* AdminAllDefectsView.swift */; };
+		09F3705327D7AFB400D8FCFD /* AllReportsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F3705227D7AFB300D8FCFD /* AllReportsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0957120627D3A48900FED3FA /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
+		0957120827D3D1F500FED3FA /* AdminView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminView.swift; sourceTree = "<group>"; };
+		0957120A27D3D81500FED3FA /* KeyBoardHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyBoardHandler.swift; sourceTree = "<group>"; };
+		0985E84427CFB9A2000F8ACC /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
+		0985E84727CFBBE2000F8ACC /* ding.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ding.mp3; sourceTree = "<group>"; };
+		0985E84927CFE299000F8ACC /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		0996CDC927C8FF5200B0DA51 /* RoadAssistant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RoadAssistant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0996CDCC27C8FF5200B0DA51 /* RoadAssistantApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoadAssistantApp.swift; sourceTree = "<group>"; };
-		0996CDCE27C8FF5200B0DA51 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0996CDD027C8FF5300B0DA51 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0996CDD327C8FF5300B0DA51 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		0996CDDE27C9005C00B0DA51 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		0996CDE027C9009D00B0DA51 /* LocationsDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsDataService.swift; sourceTree = "<group>"; };
+		0996CDE227C900F800B0DA51 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
+		0996CDE427C9012B00B0DA51 /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
+		0996CDE627C9015E00B0DA51 /* LocationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailView.swift; sourceTree = "<group>"; };
+		0996CDE827C9018400B0DA51 /* LocationsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsListView.swift; sourceTree = "<group>"; };
+		0996CDEA27C901B000B0DA51 /* LocationPerviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPerviewView.swift; sourceTree = "<group>"; };
+		0996CDEC27C901D500B0DA51 /* AnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
+		0996CDF027C925DA00B0DA51 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		0996CDF227C928BA00B0DA51 /* Picker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Picker.swift; sourceTree = "<group>"; };
+		0996CDF527C92D2D00B0DA51 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		0996CDF727C92D7200B0DA51 /* ZoomableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomableScrollView.swift; sourceTree = "<group>"; };
+		099E6E4027CC0DF800877758 /* MyImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyImage.swift; sourceTree = "<group>"; };
+		099E6E4327CC0E8100877758 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
+		099E6E4527CC0F1100877758 /* MyImagesError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyImagesError.swift; sourceTree = "<group>"; };
+		099E6E4727CC118800877758 /* CameraButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraButtonView.swift; sourceTree = "<group>"; };
+		09EE61AA27D56B2A002E53FF /* AdminAllDefectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminAllDefectsView.swift; sourceTree = "<group>"; };
+		09F3705227D7AFB300D8FCFD /* AllReportsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllReportsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +78,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0985E84627CFBBC9000F8ACC /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				0985E84727CFBBE2000F8ACC /* ding.mp3 */,
+			);
+			path = Sound;
+			sourceTree = "<group>";
+		};
 		0996CDC027C8FF5200B0DA51 = {
 			isa = PBXGroup;
 			children = (
@@ -51,8 +105,13 @@
 		0996CDCB27C8FF5200B0DA51 /* RoadAssistant */ = {
 			isa = PBXGroup;
 			children = (
+				0985E84627CFBBC9000F8ACC /* Sound */,
+				0996CDF427C92CEA00B0DA51 /* UIViewRepresentables */,
+				0996CDDD27C9003800B0DA51 /* DataServices */,
+				0996CDDC27C9002B00B0DA51 /* ViewModel */,
+				0996CDDB27C9002300B0DA51 /* Views */,
+				0996CDDA27C9001700B0DA51 /* Models */,
 				0996CDCC27C8FF5200B0DA51 /* RoadAssistantApp.swift */,
-				0996CDCE27C8FF5200B0DA51 /* ContentView.swift */,
 				0996CDD027C8FF5300B0DA51 /* Assets.xcassets */,
 				0996CDD227C8FF5300B0DA51 /* Preview Content */,
 			);
@@ -65,6 +124,96 @@
 				0996CDD327C8FF5300B0DA51 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		0996CDDA27C9001700B0DA51 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0996CDDE27C9005C00B0DA51 /* Location.swift */,
+				0996CDF227C928BA00B0DA51 /* Picker.swift */,
+				099E6E4027CC0DF800877758 /* MyImage.swift */,
+				099E6E4527CC0F1100877758 /* MyImagesError.swift */,
+				0957120A27D3D81500FED3FA /* KeyBoardHandler.swift */,
+				099E6E4227CC0E6100877758 /* Extensions */,
+				0985E84427CFB9A2000F8ACC /* SoundManager.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		0996CDDB27C9002300B0DA51 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				09EE61AF27D5774B002E53FF /* LocationsViews */,
+				09EE61AE27D57733002E53FF /* CameraViews */,
+				09EE61AC27D576FB002E53FF /* AdminViews */,
+				0985E84927CFE299000F8ACC /* InfoView.swift */,
+				0957120627D3A48900FED3FA /* HomeScreen.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0996CDDC27C9002B00B0DA51 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0996CDE227C900F800B0DA51 /* LocationViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0996CDDD27C9003800B0DA51 /* DataServices */ = {
+			isa = PBXGroup;
+			children = (
+				0996CDE027C9009D00B0DA51 /* LocationsDataService.swift */,
+			);
+			path = DataServices;
+			sourceTree = "<group>";
+		};
+		0996CDF427C92CEA00B0DA51 /* UIViewRepresentables */ = {
+			isa = PBXGroup;
+			children = (
+				0996CDF527C92D2D00B0DA51 /* ImagePicker.swift */,
+				0996CDF727C92D7200B0DA51 /* ZoomableScrollView.swift */,
+			);
+			path = UIViewRepresentables;
+			sourceTree = "<group>";
+		};
+		099E6E4227CC0E6100877758 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				099E6E4327CC0E8100877758 /* FileManager.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		09EE61AC27D576FB002E53FF /* AdminViews */ = {
+			isa = PBXGroup;
+			children = (
+				09EE61AA27D56B2A002E53FF /* AdminAllDefectsView.swift */,
+				0957120827D3D1F500FED3FA /* AdminView.swift */,
+				09F3705227D7AFB300D8FCFD /* AllReportsView.swift */,
+			);
+			path = AdminViews;
+			sourceTree = "<group>";
+		};
+		09EE61AE27D57733002E53FF /* CameraViews */ = {
+			isa = PBXGroup;
+			children = (
+				099E6E4727CC118800877758 /* CameraButtonView.swift */,
+				0996CDF027C925DA00B0DA51 /* CameraView.swift */,
+			);
+			path = CameraViews;
+			sourceTree = "<group>";
+		};
+		09EE61AF27D5774B002E53FF /* LocationsViews */ = {
+			isa = PBXGroup;
+			children = (
+				0996CDE427C9012B00B0DA51 /* LocationView.swift */,
+				0996CDE627C9015E00B0DA51 /* LocationDetailView.swift */,
+				0996CDE827C9018400B0DA51 /* LocationsListView.swift */,
+				0996CDEA27C901B000B0DA51 /* LocationPerviewView.swift */,
+				0996CDEC27C901D500B0DA51 /* AnnotationView.swift */,
+			);
+			path = LocationsViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,6 +276,7 @@
 			files = (
 				0996CDD427C8FF5300B0DA51 /* Preview Assets.xcassets in Resources */,
 				0996CDD127C8FF5300B0DA51 /* Assets.xcassets in Resources */,
+				0985E84827CFBBE2000F8ACC /* ding.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,8 +287,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0996CDCF27C8FF5200B0DA51 /* ContentView.swift in Sources */,
+				099E6E4427CC0E8100877758 /* FileManager.swift in Sources */,
+				0996CDE127C9009D00B0DA51 /* LocationsDataService.swift in Sources */,
+				09F3705327D7AFB400D8FCFD /* AllReportsView.swift in Sources */,
+				099E6E4127CC0DF900877758 /* MyImage.swift in Sources */,
+				0996CDEB27C901B000B0DA51 /* LocationPerviewView.swift in Sources */,
+				099E6E4627CC0F1100877758 /* MyImagesError.swift in Sources */,
+				0996CDE527C9012B00B0DA51 /* LocationView.swift in Sources */,
+				0985E84A27CFE299000F8ACC /* InfoView.swift in Sources */,
+				0996CDF127C925DA00B0DA51 /* CameraView.swift in Sources */,
+				0957120927D3D1F500FED3FA /* AdminView.swift in Sources */,
+				0996CDE727C9015E00B0DA51 /* LocationDetailView.swift in Sources */,
+				0996CDDF27C9005D00B0DA51 /* Location.swift in Sources */,
+				099E6E4827CC118800877758 /* CameraButtonView.swift in Sources */,
+				0996CDE927C9018400B0DA51 /* LocationsListView.swift in Sources */,
+				0996CDF827C92D7200B0DA51 /* ZoomableScrollView.swift in Sources */,
+				09EE61AB27D56B2A002E53FF /* AdminAllDefectsView.swift in Sources */,
+				0996CDED27C901D500B0DA51 /* AnnotationView.swift in Sources */,
+				0996CDE327C900F800B0DA51 /* LocationViewModel.swift in Sources */,
+				0996CDF627C92D2D00B0DA51 /* ImagePicker.swift in Sources */,
+				0957120727D3A48900FED3FA /* HomeScreen.swift in Sources */,
 				0996CDCD27C8FF5200B0DA51 /* RoadAssistantApp.swift in Sources */,
+				0957120B27D3D81500FED3FA /* KeyBoardHandler.swift in Sources */,
+				0996CDF327C928BA00B0DA51 /* Picker.swift in Sources */,
+				0985E84527CFB9A2000F8ACC /* SoundManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +444,7 @@
 				DEVELOPMENT_TEAM = QWLH47G69C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Would like to use camera";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -301,6 +474,7 @@
 				DEVELOPMENT_TEAM = QWLH47G69C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Would like to use camera";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
