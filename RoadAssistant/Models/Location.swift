@@ -14,7 +14,7 @@ struct Location: Identifiable , Equatable {
     let roadName : String
     let cityName : String
     let coordinates : CLLocationCoordinate2D
-    let description : String
+    //let description : String
     let imageName : [String]
     
 //    var id: String {

@@ -18,6 +18,7 @@ class LocationViewModel: ObservableObject {
     @Published var cameraError: Picker.CameraErrorType?
     @Published var imageDescription: String = ""
     @Published var defectRoadName: String = ""
+    @Published var defectCityName: String = ""
     @Published var isEditing = false
     @Published var selectedImage: MyImage?
     @Published var myImages: [MyImage] = []
@@ -30,12 +31,14 @@ class LocationViewModel: ObservableObject {
         image = nil
         imageDescription = ""
         defectRoadName = ""
+        defectCityName = ""
     }
     
     func display(_ myImage: MyImage){
         image = myImage.image
         imageDescription = myImage.description
         defectRoadName = myImage.roadName
+        defectCityName = myImage.cityName
         selectedImage = myImage
     }
 
@@ -43,6 +46,7 @@ class LocationViewModel: ObservableObject {
         if let index = myImages.firstIndex(where: {$0.id == selectedImage!.id}){
             myImages[index].description = imageDescription
             myImages[index].roadName = defectRoadName
+            myImages[index].cityName = defectCityName
             saveMyImagesJSONfile()
             reset()
         }
@@ -56,9 +60,9 @@ class LocationViewModel: ObservableObject {
         }
     }
         
-    func addImage(_ description: String, _ roadName: String, image: UIImage){
+    func addImage(_ description: String, _ roadName: String,_ cityName: String, image: UIImage){
         reset()
-        let myImage = MyImage(description: description, roadName: roadName)
+        let myImage = MyImage(description: description, roadName: roadName, cityName: cityName)
 
         do{
             try FileManager().saveImage("\(myImage.id)", image: image)
@@ -108,7 +112,7 @@ class LocationViewModel: ObservableObject {
     
     
     var buttonDisabled: Bool{
-        imageDescription.isEmpty || image == nil || defectRoadName.isEmpty
+        imageDescription.isEmpty || image == nil || defectRoadName.isEmpty || defectCityName.isEmpty
     }
     
     var deleteButtonIsHidden: Bool{
