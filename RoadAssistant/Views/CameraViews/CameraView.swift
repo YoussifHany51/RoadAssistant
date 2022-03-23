@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import MapKit
+import CoreLocationUI
 
 struct CameraView: View {
     
     @EnvironmentObject var vm : LocationViewModel
-        
+    @ObservedObject var locationManager = LocationManager.shared
     
     @State var reportAlert: Bool = false
     @State var showSheet: Bool = false
@@ -115,9 +117,9 @@ extension CameraView{
     
     private var header : some View{
         HStack {
-            Text("Report a road defect to help us in improving the app accuracy.")
+            Text("Report a road defect.")
                 .font(.title)
-            .padding()
+                .padding()
             
             Button
             {
@@ -126,48 +128,61 @@ extension CameraView{
                 Image(systemName:"info.circle")
                     .resizable()
                     .scaledToFit()
-                    .frame(width:40,height: 40)
-                .padding()
+                    .frame(width:30,height: 30)
+                    .padding()
             }
         }
     }
     private var defectTextFields : some View{
         VStack{
-            TextField("Defect Description", text: $vm.imageDescription){isEditing in
-                vm.isEditing = isEditing
-                    
-            }
-          
             
             TextField("Defect Road Name", text: $vm.defectRoadName){isEditing in
                 vm.isEditing = isEditing
                     
             }
+            .padding()
+            TextField("Defect City Name", text: $vm.defectCityName){isEditing in
+                vm.isEditing = isEditing
+                    
+            }
+            .padding()
         }
         .textFieldStyle(.roundedBorder)
-        .font(.title)
-        .padding()
+        .font(.title2)
+        
     }
     private var currentLocation: some View{
-        Button{
-        
-        }label: {
-        Text("Use Current Location")
-                .font(.headline)
-                .padding()
-                .frame(height:40)
-                .background(Color.blue)
-                .foregroundColor(.white)
-                .cornerRadius(15)
-        }
+//        Button{
+//
+//        }label: {
+//        Text("Use Current Location")
+//                .font(.headline)
+//                .padding()
+//                .frame(height:40)
+//                .background(Color.blue)
+//                .foregroundColor(.white)
+//                .cornerRadius(15)
+//        }
 
+        LocationButton(){
+            LocationManager.shared.requstLocation()
+            
+            if let location = locationManager.userLocation?.coordinate{
+                print(location)
+            }
+        }
+        .font(.body)
+        .foregroundColor(.white)
+        .cornerRadius(8)
+        
+        
     }
     //MARK: REPORT & UPDATE
     private var reportButton: some View{
         HStack {
             Button{
        if vm.selectedImage == nil {
-           vm.addImage(vm.imageDescription, vm.defectRoadName, image:vm.image!)
+           vm.addImage(vm.defectRoadName, vm.defectCityName, image:vm.image!)
        }else{
            vm.updateSelected()
        }

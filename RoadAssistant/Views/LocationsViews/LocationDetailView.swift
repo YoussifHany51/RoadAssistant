@@ -24,9 +24,9 @@ struct LocationDetailView: View {
                     
                     titleSection
                     
-                Divider()
-                    
-                    descriptionSection
+//                Divider()
+//                    
+//                    descriptionSection
                     
                 Divider()
                     
@@ -80,13 +80,13 @@ extension LocationDetailView {
         }
     }
     
-    private var descriptionSection : some View{
-        VStack(alignment: .leading, spacing: 8){
-            Text(location.description)
-                .font(.subheadline)
-                .foregroundColor(.primary)
-        }
-    }
+//    private var descriptionSection : some View{
+//        VStack(alignment: .leading, spacing: 8){
+//            Text(location.description)
+//                .font(.subheadline)
+//                .foregroundColor(.primary)
+//        }
+//    }
     
     private var mapLayer : some View{
         
