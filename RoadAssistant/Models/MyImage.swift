@@ -11,10 +11,10 @@ import UIKit
 
 struct MyImage: Identifiable,Codable{
     var id = UUID()
-    var description : String
-    var roadName : String
+    var reportedRoadName : String
+    var reportedCityName : String
     
-    var image: UIImage {
+    var reportedImage: UIImage {
         do{
             return try FileManager().readImage(with: id)
         }catch{
