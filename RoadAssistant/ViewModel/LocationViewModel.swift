@@ -16,7 +16,7 @@ class LocationViewModel: ObservableObject {
     @Published var source: Picker.Source = .library
     @Published var showCameraAlert = false
     @Published var cameraError: Picker.CameraErrorType?
-    @Published var imageDescription: String = ""
+    
     @Published var defectRoadName: String = ""
     @Published var defectCityName: String = ""
     @Published var isEditing = false
@@ -29,90 +29,88 @@ class LocationViewModel: ObservableObject {
     
     func reset(){
         image = nil
-        imageDescription = ""
         defectRoadName = ""
         defectCityName = ""
     }
-    
-    func display(_ myImage: MyImage){
-        image = myImage.image
-        imageDescription = myImage.description
-        defectRoadName = myImage.roadName
-        defectCityName = myImage.cityName
-        selectedImage = myImage
-    }
-
-    func updateSelected(){
-        if let index = myImages.firstIndex(where: {$0.id == selectedImage!.id}){
-            myImages[index].description = imageDescription
-            myImages[index].roadName = defectRoadName
-            myImages[index].cityName = defectCityName
-            saveMyImagesJSONfile()
-            reset()
-        }
-    }
-    
-    func deleteSelected(){
-        if let index = myImages.firstIndex(where: {$0.id == selectedImage!.id}){
-            myImages.remove(at: index)
-            saveMyImagesJSONfile()
-            reset()
-        }
-    }
-        
-    func addImage(_ description: String, _ roadName: String,_ cityName: String, image: UIImage){
-        reset()
-        let myImage = MyImage(description: description, roadName: roadName, cityName: cityName)
-
-        do{
-            try FileManager().saveImage("\(myImage.id)", image: image)
-            myImages.append(myImage)
-            saveMyImagesJSONfile()
-        }catch{
-            showFileAlert = true
-            appError = MyImageError.ErrorType(error: error as! MyImageError)
-        }
-    }
-    
-    
-    
-    func saveMyImagesJSONfile(){
-        let encoder = JSONEncoder()
-
-        do{
-            let data = try encoder.encode(myImages)
-            let jsonString = String(decoding: data, as: UTF8.self)
-            do{
-                try FileManager().saveDocument(contents: jsonString)
-            }catch{
-                showFileAlert = true
-                appError = MyImageError.ErrorType(error: error as! MyImageError)
-            }
-        }catch{
-            showFileAlert = true
-            appError = MyImageError.ErrorType(error: .encodingError)
-        }
-    }
-    
-    func loadMyImagesJSONFile(){
-        do{
-            let data = try FileManager().readDocument()
-            let decoder = JSONDecoder()
-            do{
-                myImages = try decoder.decode([MyImage].self,from: data)
-            }catch{
-                showFileAlert = true
-                appError = MyImageError.ErrorType(error: .decodingError)
-            }
-        }catch{
-            showFileAlert = true
-            appError = MyImageError.ErrorType(error: error as! MyImageError)
-        }
-    }
+//
+//    func display(_ myImage: MyImage){
+//        image = myImage.reportedImage
+//    //    imageDescription = myImage.description
+//        defectRoadName = myImage.reportedRoadName
+//        defectCityName = myImage.reportedCityName
+//        selectedImage = myImage
+//    }
+//
+//    func updateSelected(){
+//        if let index = myImages.firstIndex(where: {$0.id == selectedImage!.id}){
+//            myImages[index].reportedRoadName = defectRoadName
+//            myImages[index].reportedCityName = defectCityName
+//            saveMyImagesJSONfile()
+//            reset()
+//        }
+//    }
+//
+//    func deleteSelected(){
+//        if let index = myImages.firstIndex(where: {$0.id == selectedImage!.id}){
+//            myImages.remove(at: index)
+//            saveMyImagesJSONfile()
+//            reset()
+//        }
+//    }
+//
+//    func addImage( _ roadName: String,_ cityName: String, image: UIImage){
+//        reset()
+//        let myImage = MyImage(reportedRoadName: roadName, reportedCityName: cityName)
+//
+//        do{
+//            try FileManager().saveImage("\(myImage.id)", image: image)
+//            myImages.append(myImage)
+//            saveMyImagesJSONfile()
+//        }catch{
+//            showFileAlert = true
+//            appError = MyImageError.ErrorType(error: error as! MyImageError)
+//        }
+//    }
+//
+//
+//
+//    func saveMyImagesJSONfile(){
+//        let encoder = JSONEncoder()
+//
+//        do{
+//            let data = try encoder.encode(myImages)
+//            let jsonString = String(decoding: data, as: UTF8.self)
+//            do{
+//                try FileManager().saveDocument(contents: jsonString)
+//            }catch{
+//                showFileAlert = true
+//                appError = MyImageError.ErrorType(error: error as! MyImageError)
+//            }
+//        }catch{
+//            showFileAlert = true
+//            appError = MyImageError.ErrorType(error: .encodingError)
+//        }
+//    }
+//
+//    func loadMyImagesJSONFile(){
+//        do{
+//            let data = try FileManager().readDocument()
+//            let decoder = JSONDecoder()
+//            do{
+//                myImages = try decoder.decode([MyImage].self,from: data)
+//            }catch{
+//                showFileAlert = true
+//                appError = MyImageError.ErrorType(error: .decodingError)
+//            }
+//        }catch{
+//            showFileAlert = true
+//            appError = MyImageError.ErrorType(error: error as! MyImageError)
+//        }
+//    }
     
     
     var buttonDisabled: Bool{
-        imageDescription.isEmpty || image == nil || defectRoadName.isEmpty || defectCityName.isEmpty
+      image == nil || defectRoadName.isEmpty || defectCityName.isEmpty
     }
     
     var deleteButtonIsHidden: Bool{
