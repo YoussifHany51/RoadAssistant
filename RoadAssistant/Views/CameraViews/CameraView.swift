@@ -182,9 +182,10 @@ extension CameraView{
         HStack {
             Button{
        if vm.selectedImage == nil {
-           vm.addImage(vm.defectRoadName, vm.defectCityName, image:vm.image!)
+//           vm.addImage(vm.defectRoadName, vm.defectCityName, image:vm.image!)
+           vm.reset()
        }else{
-           vm.updateSelected()
+           //vm.updateSelected()
        }
                 SoundManager.instance.playSound()
                 
@@ -198,13 +199,13 @@ extension CameraView{
             .disabled(vm.buttonDisabled)
             .opacity(vm.buttonDisabled ? 0.6 : 1)
      //MARK: DELETE BUTTON
-            if !vm.deleteButtonIsHidden{
-                Button{
-                    vm.deleteSelected()
-                }label: {
-                    CameraButtonsView(symbolName: "trash", label: "Delete")
-                }
-            }
+//            if !vm.deleteButtonIsHidden{
+//                Button{
+//                    vm.deleteSelected()
+//                }label: {
+//                    CameraButtonsView(symbolName: "trash", label: "Delete")
+//                }
+//            }
         }
     }
 }
