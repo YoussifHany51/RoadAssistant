@@ -8,6 +8,7 @@
 import Foundation
 import MapKit
 import SwiftUI
+import CoreLocationUI
 
 class LocationViewModel: ObservableObject {
     // Camera and Photo picker ViewModel
@@ -20,11 +21,9 @@ class LocationViewModel: ObservableObject {
     @Published var defectRoadName: String = ""
     @Published var defectCityName: String = ""
     @Published var isEditing = false
-    @Published var selectedImage: MyImage?
-    @Published var myImages: [MyImage] = []
     @Published var showFileAlert = false
+    @Published var reportLocationBTPressed = false
     @Published var appError: MyImageError.ErrorType?
-    
     
     
     func reset(){
@@ -32,90 +31,12 @@ class LocationViewModel: ObservableObject {
         defectRoadName = ""
         defectCityName = ""
     }
-//
-//    func display(_ myImage: MyImage){
-//        image = myImage.reportedImage
-//    //    imageDescription = myImage.description
-//        defectRoadName = myImage.reportedRoadName
-//        defectCityName = myImage.reportedCityName
-//        selectedImage = myImage
-//    }
-//
-//    func updateSelected(){
-//        if let index = myImages.firstIndex(where: {$0.id == selectedImage!.id}){
-//            myImages[index].reportedRoadName = defectRoadName
-//            myImages[index].reportedCityName = defectCityName
-//            saveMyImagesJSONfile()
-//            reset()
-//        }
-//    }
-//
-//    func deleteSelected(){
-//        if let index = myImages.firstIndex(where: {$0.id == selectedImage!.id}){
-//            myImages.remove(at: index)
-//            saveMyImagesJSONfile()
-//            reset()
-//        }
-//    }
-//
-//    func addImage( _ roadName: String,_ cityName: String, image: UIImage){
-//        reset()
-//        let myImage = MyImage(reportedRoadName: roadName, reportedCityName: cityName)
-//
-//        do{
-//            try FileManager().saveImage("\(myImage.id)", image: image)
-//            myImages.append(myImage)
-//            saveMyImagesJSONfile()
-//        }catch{
-//            showFileAlert = true
-//            appError = MyImageError.ErrorType(error: error as! MyImageError)
-//        }
-//    }
-//
-//
-//
-//    func saveMyImagesJSONfile(){
-//        let encoder = JSONEncoder()
-//
-//        do{
-//            let data = try encoder.encode(myImages)
-//            let jsonString = String(decoding: data, as: UTF8.self)
-//            do{
-//                try FileManager().saveDocument(contents: jsonString)
-//            }catch{
-//                showFileAlert = true
-//                appError = MyImageError.ErrorType(error: error as! MyImageError)
-//            }
-//        }catch{
-//            showFileAlert = true
-//            appError = MyImageError.ErrorType(error: .encodingError)
-//        }
-//    }
-//
-//    func loadMyImagesJSONFile(){
-//        do{
-//            let data = try FileManager().readDocument()
-//            let decoder = JSONDecoder()
-//            do{
-//                myImages = try decoder.decode([MyImage].self,from: data)
-//            }catch{
-//                showFileAlert = true
-//                appError = MyImageError.ErrorType(error: .decodingError)
-//            }
-//        }catch{
-//            showFileAlert = true
-//            appError = MyImageError.ErrorType(error: error as! MyImageError)
-//        }
-//    }
+
     
-    
-    var buttonDisabled: Bool{
-      image == nil || defectRoadName.isEmpty || defectCityName.isEmpty
+    var userReportValidation: Bool{
+      image == nil || defectRoadName.isEmpty || defectCityName.isEmpty || reportLocationBTPressed == false
     }
-    
-    var deleteButtonIsHidden: Bool{
-        isEditing || selectedImage == nil
-    }
+       
     
     func showPhotoPicker(){
         do{
@@ -132,12 +53,12 @@ class LocationViewModel: ObservableObject {
     
     // MARK: LOCATION VIEW MODEL
     
-    @Published var locations: [Location]
+    @Published var defects: [Defect]
 
     
-    @Published var mapLocation : Location {
+    @Published var mapLocation : Defect {
         didSet{
-            updateMapRegion(location: mapLocation)
+            updateMapRegion(defect: mapLocation)
         }
     }
     
@@ -148,26 +69,26 @@ class LocationViewModel: ObservableObject {
     
     @Published var showLocationsList: Bool = false
     
-    @Published var sheetLocation: Location? = nil
+    @Published var sheetLocation: Defect? = nil
     
     
     //MARK: init func
     init(){
         // location viewModel
-        let locations = LocationsDataService.locations
-        self.locations = locations
-        self.mapLocation = locations.first!
-        self.updateMapRegion(location: locations.first!)
+        let defects = LocationsDataService.defects
+        self.defects = defects
+        self.mapLocation = defects.first!
+        self.updateMapRegion(defect: defects.first!)
         
         
         // Camera and Photo picker ViewModel
        // print(FileManager.docDirURL.path)
     }
     
-    private func updateMapRegion(location:Location){
+    private func updateMapRegion(defect:Defect){
         withAnimation(.easeInOut){
             mapRegion = MKCoordinateRegion(
-                center: location.coordinates,
+                center: defect.coordinates,
                 span: mapSpan)
         }
     }
@@ -180,27 +101,25 @@ class LocationViewModel: ObservableObject {
         }
     }
     
-    func nextLocation(location: Location){
+    func nextLocation(defect: Defect){
         withAnimation(.easeInOut){
-            mapLocation = location
+            mapLocation = defect
             showLocationsList = false
         }
     }
     
     func nextButtonPressed(){
         
-        guard  let currIndex = locations.firstIndex (where: {$0 == mapLocation})else {
-            return
-        }
+        guard  let currIndex = defects.firstIndex (where: {$0 == mapLocation}) else { return }
         
         let nextIndex = currIndex + 1
-        guard locations.indices.contains(nextIndex)else {
+        guard defects.indices.contains(nextIndex)else {
             
-            guard  let firstIndex = locations.first else { return }
-            nextLocation(location: firstIndex)
+            guard  let firstIndex = defects.first else { return }
+            nextLocation(defect: firstIndex)
             return
         }
-        let nextLoc = locations[nextIndex]
-        nextLocation(location: nextLoc)
+        let nextLoc = defects[nextIndex]
+        nextLocation(defect: nextLoc)
     }
 }
