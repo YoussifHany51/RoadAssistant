@@ -18,12 +18,12 @@ struct LocationsListView: View {
         NavigationView{
             ZStack {
                 List{
-                    ForEach(filterList){ location in
+                    ForEach(filterList){ defect in
                         Button{
-                            vm.nextLocation(location: location)
+                            vm.nextLocation(defect: defect)
                             vm.showLocationsList = false
                         } label: {
-                            listRowView(location: location)
+                            listRowView(defect: defect)
                         }
                         .padding(.vertical,4)
                         .listRowBackground(Color.clear)
@@ -37,8 +37,8 @@ struct LocationsListView: View {
         
     }
 
-    var filterList : [Location]{
-        return vm.locations.filter{ $0.roadName.contains(searchText)}
+    var filterList : [Defect]{
+        return vm.defects.filter{ $0.roadName.contains(searchText)}
     }
     
     
@@ -54,9 +54,9 @@ struct LocationsListView_Previews: PreviewProvider {
 
 extension LocationsListView {
     
-    private func listRowView(location: Location) -> some View {
+    private func listRowView(defect: Defect) -> some View {
         HStack{
-            if let imageName = location.imageName.first{
+            if let imageName = defect.imageName.first{
                 Image(imageName)
                     .resizable()
                     .scaledToFit()
@@ -65,9 +65,9 @@ extension LocationsListView {
             }
             
             VStack(alignment: .leading){
-                Text(location.roadName)
+                Text(defect.roadName)
                     .font(.headline)
-                Text(location.cityName)
+                Text(defect.cityName)
                     .font(.subheadline)
             }
             .frame(maxWidth:.infinity,alignment: .leading)
