@@ -16,6 +16,7 @@ struct CameraView: View {
     
     @State var reportAlert: Bool = false
     @State var showSheet: Bool = false
+    @State var userLocationExplanation: Bool = false
  
     
     var body: some View {
@@ -61,7 +62,6 @@ struct CameraView: View {
                                 )
                         })
                         }
-                        // User used his current location
                         cameraOptionsButtons
                         .padding()
                     }
@@ -104,7 +104,7 @@ extension CameraView{
                 Text(cameraError.message)
             })
 
-            
+
             Button{
                 vm.source = .library
                 vm.showPhotoPicker()
@@ -151,6 +151,7 @@ extension CameraView{
         .font(.title2)
         
     }
+    //MARK: REPORT LOCATION
     private var currentLocation: some View{
 //        Button{
 //
@@ -165,47 +166,44 @@ extension CameraView{
 //        }
 
         LocationButton(){
+            vm.reportLocationBTPressed.toggle()
             LocationManager.shared.requstLocation()
             
-            if let location = locationManager.userLocation?.coordinate{
-                print(location)
+       if let locationCoordinate = locationManager.userLocation?.coordinate{
+                print(locationCoordinate)
             }
         }
         .font(.body)
         .foregroundColor(.white)
         .cornerRadius(8)
-        
+//        .onLongPressGesture{
+//            userLocationExplanation.toggle()
+//        }
+//        .alert(isPresented: $userLocationExplanation, content: {
+//            Alert(
+//                title: Text("Current Location Button Explanation"),
+//                message: Text("This button allows us to get the defect specific coordinates")
+//            )
+//        })
         
     }
-    //MARK: REPORT & UPDATE
+    
+    //MARK: SUBMIT REPORT BT
     private var reportButton: some View{
         HStack {
             Button{
-       if vm.selectedImage == nil {
-//           vm.addImage(vm.defectRoadName, vm.defectCityName, image:vm.image!)
-           vm.reset()
-       }else{
-           //vm.updateSelected()
-       }
-                SoundManager.instance.playSound()
                 
+                SoundManager.instance.playSound()
+                vm.reset()
                 reportAlert.toggle()
                 
             }label: {
                 CameraButtonsView(
                     symbolName:"square.and.arrow.up.fill",
-                    label:vm.selectedImage == nil ? "Report" : "Update")
+                    label:"Report")
             }
-            .disabled(vm.buttonDisabled)
-            .opacity(vm.buttonDisabled ? 0.6 : 1)
-     //MARK: DELETE BUTTON
-//            if !vm.deleteButtonIsHidden{
-//                Button{
-//                    vm.deleteSelected()
-//                }label: {
-//                    CameraButtonsView(symbolName: "trash", label: "Delete")
-//                }
-//            }
+            .disabled(vm.userReportValidation)
+            .opacity(vm.userReportValidation ? 0.6 : 1)
         }
     }
 }
