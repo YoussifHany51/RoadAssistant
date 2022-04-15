@@ -11,21 +11,19 @@ import MapKit
 struct LocationView: View {
     
     @EnvironmentObject private var vm: LocationViewModel
-    @StateObject private var keyBoardHandler = KeyBoardHandler()
-    
     
     var body: some View {
         NavigationView {
             ZStack{
                         Map(coordinateRegion: $vm.mapRegion,
-                            annotationItems: vm.locations,
-                            annotationContent: { location in
-                            MapAnnotation(coordinate: location.coordinates){
+                            annotationItems: vm.defects,
+                            annotationContent: { defect in
+                            MapAnnotation(coordinate: defect.coordinates){
                                 AnnotationView()
-                                    .scaleEffect(vm.mapLocation == location ? 1 : 0.7)
+                                    .scaleEffect(vm.mapLocation == defect ? 1 : 0.7)
                                     .shadow(radius: 20)
                                     .onTapGesture {
-                                        vm.nextLocation(location: location)
+                                        vm.nextLocation(defect: defect)
                                     }
                             }
                         })
@@ -44,9 +42,9 @@ struct LocationView: View {
                         
                         // perview section
                         ZStack{
-                            ForEach(vm.locations){ location in
-                                if  vm.mapLocation == location {
-                                    LocationPerviewView(location: location)
+                            ForEach(vm.defects){ defect in
+                                if  vm.mapLocation == defect {
+                                    LocationPerviewView(defect: defect)
                                         .shadow(color: Color.black.opacity(0.3), radius: 20)
                                         .padding()
                                         .transition(.asymmetric(insertion: .move(edge: .trailing),
@@ -56,8 +54,8 @@ struct LocationView: View {
                         }
                     }
                 }
-                .sheet(item: $vm.sheetLocation, onDismiss: nil){ location in
-                    LocationDetailView(location: location)
+                .sheet(item: $vm.sheetLocation, onDismiss: nil){ defect in
+                    LocationDetailView(defect: defect)
             }
                 .navigationBarHidden(true)
         }
