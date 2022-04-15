@@ -15,12 +15,7 @@ struct RoadAssistantApp: App {
     
     var body: some Scene {
         WindowGroup {
-//            LocationView()
-//                .environmentObject(vm)
-//                .onAppear{
-//                    UserDefaults.standard.set(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
-//                }
-            HomeScreen()
+            LocationView()
                 .environmentObject(vm)
                 .onAppear{
                     UserDefaults.standard.set(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
