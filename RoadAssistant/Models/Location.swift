@@ -8,12 +8,12 @@
 import Foundation
 import MapKit
 
-struct Location: Identifiable , Equatable {
+struct Defect: Identifiable , Equatable {
         
     let id = UUID().uuidString
     let roadName : String
     let cityName : String
-    let coordinates : CLLocationCoordinate2D
+    var coordinates : CLLocationCoordinate2D
     let imageName : [String]
     
 //    var id: String {
@@ -21,7 +21,7 @@ struct Location: Identifiable , Equatable {
 //    }
     
     //Equatable
-    static func == (lhs: Location, rhs: Location) -> Bool {
+    static func == (lhs: Defect, rhs: Defect) -> Bool {
         lhs.id == rhs.id
     }
     
