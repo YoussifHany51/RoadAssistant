@@ -11,7 +11,7 @@ import MapKit
 struct LocationDetailView: View {
     
     @EnvironmentObject private var vm: LocationViewModel
-    let location:Location
+    let defect:Defect
     
     var body: some View {
         ScrollView{
@@ -46,7 +46,7 @@ struct LocationDetailView: View {
 
 struct LocationDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        LocationDetailView(location: LocationsDataService.locations.first!)
+        LocationDetailView(defect: LocationsDataService.defects.first!)
             .environmentObject(LocationViewModel())
     }
 }
@@ -56,7 +56,7 @@ extension LocationDetailView {
     
     private var imageSection :  some View{
         TabView{
-            ForEach(location.imageName, id: \.self){
+            ForEach(defect.imageName, id: \.self){
                 Image($0)
                     .resizable()
                     .scaledToFill()
@@ -71,10 +71,10 @@ extension LocationDetailView {
     
     private var titleSection : some View{
         VStack(alignment: .leading, spacing: 8){
-            Text(location.roadName)
+            Text(defect.roadName)
                 .font(.largeTitle)
                 .fontWeight(.semibold)
-            Text(location.cityName)
+            Text(defect.cityName)
                 .font(.title)
                 .foregroundColor(.secondary)
         }
@@ -91,12 +91,12 @@ extension LocationDetailView {
     private var mapLayer : some View{
         
         Map(coordinateRegion: .constant(MKCoordinateRegion(
-            center: location.coordinates,
+            center: defect.coordinates,
             span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0))),
-            annotationItems: [location]) { location in
-            MapAnnotation(coordinate: location.coordinates){
+            annotationItems: [defect]) { defect in
+            MapAnnotation(coordinate: defect.coordinates){
                 AnnotationView()
-                    .scaleEffect(vm.mapLocation == location ? 1 : 0.7)
+                    .scaleEffect(vm.mapLocation == defect ? 1 : 0.7)
                     .shadow(radius: 20)
             }
         }
