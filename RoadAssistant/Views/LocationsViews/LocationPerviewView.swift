@@ -11,7 +11,7 @@ struct LocationPerviewView: View {
     
     @EnvironmentObject private var vm : LocationViewModel
     
-    let location: Location
+    let defect: Defect
     
     var body: some View {
         HStack (alignment:.bottom,spacing: 0){
@@ -45,7 +45,7 @@ struct LocationPerviewView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.blue.ignoresSafeArea()
-            LocationPerviewView(location: LocationsDataService.locations.first!)
+            LocationPerviewView(defect: LocationsDataService.defects.first!)
                 .padding()
         }
         .environmentObject(LocationViewModel())
@@ -57,7 +57,7 @@ extension LocationPerviewView {
     
     private var imageSection: some View{
         ZStack{
-            if let imageName =  location.imageName.first{
+            if let imageName =  defect.imageName.first{
                 Image(imageName)
                     .resizable()
                     .scaleEffect()
@@ -73,11 +73,11 @@ extension LocationPerviewView {
     
     private var titleSection : some View{
         VStack (alignment: .leading, spacing: 4){
-            Text(location.roadName)
+            Text(defect.roadName)
                 .font(.title2)
                 .fontWeight(.bold)
             
-            Text(location.cityName)
+            Text(defect.cityName)
                 .font(.subheadline)
         }
         .frame(maxWidth:.infinity,alignment: .leading)
@@ -85,7 +85,7 @@ extension LocationPerviewView {
     
     private var learnMoreButton : some View {
         Button{
-            vm.sheetLocation = location
+            vm.sheetLocation = defect
         } label: {
             Text("Learn more")
                 .font(.headline)
