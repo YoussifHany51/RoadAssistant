@@ -9,9 +9,13 @@ import Foundation
 import MapKit
 import SwiftUI
 import CoreLocationUI
+import Firebase
+import UIKit
+import FirebaseDatabase
+import FirebaseDatabaseSwift
 
-class LocationViewModel: ObservableObject {
-    // Camera and Photo picker ViewModel
+class DefectViewModel: ObservableObject {
+    //MARK: Camera & Photo picker
     @Published var image : UIImage?
     @Published var showPicker = false
     @Published var source: Picker.Source = .library
@@ -20,6 +24,8 @@ class LocationViewModel: ObservableObject {
     
     @Published var defectRoadName: String = ""
     @Published var defectCityName: String = ""
+    @Published var defectLocation: CLLocationCoordinate2D =
+    CLLocationCoordinate2D(latitude:0 , longitude:0)
     @Published var isEditing = false
     @Published var showFileAlert = false
     @Published var reportLocationBTPressed = false
@@ -31,12 +37,12 @@ class LocationViewModel: ObservableObject {
         defectRoadName = ""
         defectCityName = ""
     }
-
+    
     
     var userReportValidation: Bool{
-      image == nil || defectRoadName.isEmpty || defectCityName.isEmpty || reportLocationBTPressed == false
+        image == nil || defectRoadName.isEmpty || defectCityName.isEmpty || reportLocationBTPressed == false
     }
-       
+    
     
     func showPhotoPicker(){
         do{
@@ -54,7 +60,7 @@ class LocationViewModel: ObservableObject {
     // MARK: LOCATION VIEW MODEL
     
     @Published var defects: [Defect]
-
+    
     
     @Published var mapLocation : Defect {
         didSet{
@@ -79,10 +85,6 @@ class LocationViewModel: ObservableObject {
         self.defects = defects
         self.mapLocation = defects.first!
         self.updateMapRegion(defect: defects.first!)
-        
-        
-        // Camera and Photo picker ViewModel
-       // print(FileManager.docDirURL.path)
     }
     
     private func updateMapRegion(defect:Defect){
@@ -92,8 +94,6 @@ class LocationViewModel: ObservableObject {
                 span: mapSpan)
         }
     }
-
-    
     
     func toggleLocationList(){
         withAnimation(.easeInOut){
@@ -121,5 +121,45 @@ class LocationViewModel: ObservableObject {
         }
         let nextLoc = defects[nextIndex]
         nextLocation(defect: nextLoc)
+    }
+    //   MARK: Firebase DB
+  
+    func convertUIImageToString (image: UIImage) -> [String] {
+
+        var imageAsData: Data = image.pngData()!
+        var imageAsInt: Int = 0 // initialize
+
+        let data = NSData(bytes: &imageAsData, length: MemoryLayout<Int>.size)
+        data.getBytes(&imageAsInt, length: MemoryLayout<Int>.size)
+
+        let imageAsString: String = String (imageAsInt)
+        
+        var res:[String] = []
+        res.append(imageAsString)
+
+        return res
+
+    }
+    
+    private let ref = Database.database().reference()
+    private var number = 0
+    
+    
+    func pushReport(roadName:String,cityName:String,location:CLLocationCoordinate2D,image:UIImage){
+    let img = convertUIImageToString(image: image)
+        var defectObj = Defect(id: String(number), roadName: roadName, cityName: cityName, coordinates: location, imageName: img)
+
+//        defectObj.id = String(number)
+//        defectObj.roadName = roadName
+//        defectObj.cityName = cityName
+//        defectObj.coordinates = location
+//        defectObj.imageName = img
+        
+        ref.child(defectObj.id).setValue(defectObj.toDictionary)
+        
+        number+=1
+    }
+    func pushTest(){
+        ref.setValue("Test")
     }
 }

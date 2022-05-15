@@ -9,7 +9,7 @@ import SwiftUI
 import MapKit
 import CoreLocationUI
 
-struct CameraView: View {
+struct UserReportView: View {
     
     @EnvironmentObject var vm : LocationViewModel
     @ObservedObject var locationManager = LocationManager.shared
@@ -83,13 +83,13 @@ struct CameraView: View {
 
 struct CameraView_Previews: PreviewProvider {
     static var previews: some View {
-        CameraView()
+        UserReportView()
             .environmentObject(LocationViewModel())
     }
 }
 
 
-extension CameraView{
+extension UserReportView{
     private var cameraOptionsButtons: some View{
         HStack{
             Button{
