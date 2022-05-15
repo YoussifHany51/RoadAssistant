@@ -10,7 +10,7 @@ import MapKit
 
 struct LocationView: View {
     
-    @EnvironmentObject private var vm: LocationViewModel
+    @EnvironmentObject private var vm: DefectViewModel
     
     var body: some View {
         NavigationView {
@@ -34,7 +34,7 @@ struct LocationView: View {
                         header
                             .padding()
                         
-                      // searchButton
+                      
                         addReportButton
                         
                         
@@ -66,7 +66,7 @@ struct LocationView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             LocationView()
-                .environmentObject(LocationViewModel())
+                .environmentObject(DefectViewModel())
         }
     }
 }
@@ -114,7 +114,7 @@ extension LocationView{
             ZStack {
                 HStack{
                         Spacer()
-                    NavigationLink(destination:CameraView()){
+                    NavigationLink(destination:UserReportView()){
                             Image(systemName: "camera.viewfinder")
                                     .resizable()
                                     .scaledToFit()

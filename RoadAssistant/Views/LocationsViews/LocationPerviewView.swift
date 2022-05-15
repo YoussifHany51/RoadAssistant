@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LocationPerviewView: View {
     
-    @EnvironmentObject private var vm : LocationViewModel
+    @EnvironmentObject private var vm : DefectViewModel
     
     let defect: Defect
     
@@ -48,7 +48,7 @@ struct LocationPerviewView_Previews: PreviewProvider {
             LocationPerviewView(defect: LocationsDataService.defects.first!)
                 .padding()
         }
-        .environmentObject(LocationViewModel())
+        .environmentObject(DefectViewModel())
     }
 }
 
