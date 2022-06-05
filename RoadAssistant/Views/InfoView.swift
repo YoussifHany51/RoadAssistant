@@ -19,7 +19,7 @@ struct InfoView: View {
                 Text("The data which is shown on the app is real data taken by our AI kit.")
                 Text("If you would like to help us in improving the quality and accuracy of the project, please report a defect that you have found on the road capture it using your phone camera and tell us in which lane of the road is itand the name of the road.")
                 Text("Another method to improve the accuracy is by buying our AI model kit and putting it in your vehicle to capture the defects Automatically.")
-                Text("Kindly when you add a report please write the road name in English only.")
+                Text("Kindly when you add a report please write it in English only.")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .padding()

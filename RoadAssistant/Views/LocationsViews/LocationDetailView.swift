@@ -10,23 +10,26 @@ import MapKit
 
 struct LocationDetailView: View {
     
-    @EnvironmentObject private var vm: LocationViewModel
+    @EnvironmentObject private var vm: DefectViewModel
     let defect:Defect
     
     var body: some View {
         ScrollView{
             VStack{
+                if defect.imageName.isEmpty{
+                    Image(systemName: "photo.fill")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width:UIScreen.main.bounds.width)
+                        .clipped()
+                }else{
                 imageSection
                     .shadow(color: Color.black.opacity(0.3),
                             radius: 20,x:0,y:10)
-                
+                }
                 VStack(alignment: .leading, spacing: 16){
                     
                     titleSection
-                    
-//                Divider()
-//                    
-//                    descriptionSection
                     
                 Divider()
                     
@@ -47,7 +50,7 @@ struct LocationDetailView: View {
 struct LocationDetailView_Previews: PreviewProvider {
     static var previews: some View {
         LocationDetailView(defect: LocationsDataService.defects.first!)
-            .environmentObject(LocationViewModel())
+            .environmentObject(DefectViewModel())
     }
 }
 
@@ -80,13 +83,6 @@ extension LocationDetailView {
         }
     }
     
-//    private var descriptionSection : some View{
-//        VStack(alignment: .leading, spacing: 8){
-//            Text(location.description)
-//                .font(.subheadline)
-//                .foregroundColor(.primary)
-//        }
-//    }
     
     private var mapLayer : some View{
         
