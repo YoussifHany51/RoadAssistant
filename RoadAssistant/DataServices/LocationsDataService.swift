@@ -10,11 +10,10 @@ import MapKit
 
 class LocationsDataService {
     
-    static let defects: [Defect] = [
+    static var defects: [Defect] = [
         
         Defect(
             roadName: "26th july axis road",
-            cityName: "6 October city",
             coordinates: CLLocationCoordinate2D(latitude:30.00908 , longitude:30.98528),
             imageName: [
              "pothole1"
