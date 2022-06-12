@@ -15,7 +15,7 @@ import FirebaseDatabase
 import FirebaseDatabaseSwift
 import CodableFirebase
 import FirebaseFirestore
-//import SwiftProtobuf
+import FirebaseStorage
 
 class DefectViewModel: ObservableObject {
     //MARK: Camera & Photo picker
@@ -32,7 +32,8 @@ class DefectViewModel: ObservableObject {
     @Published var showFileAlert = false
     @Published var reportLocationBTPressed = false
     @Published var appError: MyImageError.ErrorType?
-    @Published var fetchData = [Defect]()
+    @Published var fetchImage = [UIImage]()
+    @Published var fetchedDefect : Defect? = nil
     
     func reset(){
         image = nil
@@ -87,6 +88,7 @@ class DefectViewModel: ObservableObject {
         self.mapLocation = defects.first!
         self.updateMapRegion(defect: defects.first!)
         fetchDefects()
+        retrieveDefectImage()
     }
     
     private func updateMapRegion(defect:Defect){
@@ -144,34 +146,91 @@ class DefectViewModel: ObservableObject {
     }
     var ref : DatabaseReference! = Database.database().reference()
     var number = 0;
-    func pushReport(roadName:String,coordinates:CLLocationCoordinate2D,image:UIImage){
+    func pushReport(roadName:String,coordinates:CLLocationCoordinate2D){
         
-        let img = convertUIImageToString(image: image)
         let latitude = coordinates.latitude
         let longitude = coordinates.longitude
-//        let defectObj = Defect(roadName: roadName, coordinates: coordinates, imageName: img)
-        
-//        let defectDictionary:[String:Any] = [
-//            "roadName" : defectObj.roadName,
-//            "coordinates" : defectObj.coordinates,
-//            "imageName" : defectObj.imageName] as [String : Any]
-        
-//        ref.child("DefectInfo").childByAutoId().setValue(defectDictionary.description,
-//                                                         withCompletionBlock: {error ,ref in
-//            if let error = error {
-//                print("DefectInfoDictionary was not saved: \(error.localizedDescription)")
-//            }else{
-//                print("DefectInfoDictionary saved successfully!")
-//                self.number+=1
-//            }
-//        })
 
         self.ref.child("Defect").childByAutoId().setValue(
-            ["roadName": roadName,"latitude": latitude,"longitude":longitude,"imageName": img])
+            ["roadName": roadName,"latitude": latitude,"longitude":longitude])
         
     }
-
     
+    
+    func uploadDefectImage(image:UIImage){
+        
+        // Create storage reference
+        let storageRef = Storage.storage().reference()
+        
+        // Turn our image into Data
+        let imageData =  image.jpegData(compressionQuality: 0.8)
+        
+        // Check that we can convert it to Data
+        guard imageData != nil else{return}
+        
+        // Specify the file path
+        let path = "DefectImages/\(UUID().uuidString).jpg"
+        let fileRef = storageRef.child(path)
+        
+        // Upload that Data
+        let uploadImage = fileRef.putData(imageData!,metadata: nil) {
+            metaData,error in
+            
+            // Check for errors
+            if error == nil && metaData != nil {
+                
+                //  Save a reference to the file in Firestore DB
+                let db = Firestore.firestore()
+                db.collection("images").document().setData(["url":path])
+                
+            }
+            print(error?.localizedDescription as Any)
+        }
+        
+    }
+    
+    func retrieveDefectImage(){
+        
+        let db = Firestore.firestore()
+        
+        db.collection("images").getDocuments { snapshot, error in
+            
+            if error == nil && snapshot != nil {
+                
+                var paths = [String]()
+                // Loop through all the returned docs
+                for doc in snapshot!.documents {
+                    
+                    paths.append(doc["url"] as! String)
+                    
+                }
+                // Loop through each file & fetch data from storage
+                for path in paths {
+                    // Get reference to storage
+                    let storageRef = Storage.storage().reference()
+                    
+                    // Specify the path
+                    let fileRef = storageRef.child(path)
+                    
+                    // Retrieve data
+                    fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
+                        
+                        if error == nil && data != nil {
+                            
+                            if let image = UIImage(data: data!) {
+                                
+                                DispatchQueue.main.async {
+                                    self.fetchImage.append(image)
+                                }
+                            }
+                        }
+                    }
+                }
+                
+            }
+        }
+        
+    }
     
     func fetchDefects(){
         self.ref.child("Defect").observe(.value) { snapshot in
@@ -188,8 +247,15 @@ class DefectViewModel: ObservableObject {
                 let arrayOfValues = Array(model.values.map{ $0 })
                 print(arrayOfValues)
                 
-                for item in arrayOfValues{
+                for var item in arrayOfValues{
                     print(item)
+                    
+                    for image in self.fetchImage {
+                     let img = self.convertUIImageToString(image: image)
+                    
+                    item.imageName = img
+                    }
+                    
                     self.defects.append(item)
                 }
             } catch let error {
@@ -198,8 +264,7 @@ class DefectViewModel: ObservableObject {
         }withCancel: { error in
             print(error.localizedDescription)
         }
-        
-  }
+    }
     
     
     
