@@ -77,9 +77,6 @@ extension LocationDetailView {
             Text(defect.roadName)
                 .font(.largeTitle)
                 .fontWeight(.semibold)
-            Text(defect.cityName)
-                .font(.title)
-                .foregroundColor(.secondary)
         }
     }
     

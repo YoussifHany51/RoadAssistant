@@ -77,8 +77,6 @@ extension LocationPerviewView {
                 .font(.title2)
                 .fontWeight(.bold)
             
-            Text(defect.cityName)
-                .font(.subheadline)
         }
         .frame(maxWidth:.infinity,alignment: .leading)
     }

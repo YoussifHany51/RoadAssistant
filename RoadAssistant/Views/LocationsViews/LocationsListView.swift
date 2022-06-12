@@ -67,8 +67,6 @@ extension LocationsListView {
             VStack(alignment: .leading){
                 Text(defect.roadName)
                     .font(.headline)
-                Text(defect.cityName)
-                    .font(.subheadline)
             }
             .frame(maxWidth:.infinity,alignment: .leading)
         }
