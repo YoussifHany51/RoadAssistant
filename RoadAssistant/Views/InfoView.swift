@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct InfoView: View {
+    @StateObject var vm = DefectViewModel()
     var body: some View {
         
         ScrollView {
@@ -24,6 +25,11 @@ struct InfoView: View {
                     .fontWeight(.bold)
                     .padding()
                 Spacer()
+//                ForEach(vm.fetchImage, id:\.self){ image in
+//                    Image(uiImage: image)
+//                        .resizable()
+//                        .scaledToFit()
+//                }
             }
             .font(.title)
             .padding()
