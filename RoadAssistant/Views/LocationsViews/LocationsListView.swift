@@ -56,8 +56,8 @@ extension LocationsListView {
     
     private func listRowView(defect: Defect) -> some View {
         HStack{
-            if let imageName = defect.imageName.first{
-                Image(imageName)
+            if let imageName = defect.imageName{
+                Image(uiImage: imageName)
                     .resizable()
                     .scaledToFit()
                     .frame(width:45,height: 45)

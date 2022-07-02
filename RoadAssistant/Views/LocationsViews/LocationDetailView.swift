@@ -16,17 +16,17 @@ struct LocationDetailView: View {
     var body: some View {
         ScrollView{
             VStack{
-                if defect.imageName.isEmpty{
-                    Image(systemName: "photo.fill")
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width:UIScreen.main.bounds.width)
-                        .clipped()
-                }else{
+//                if defect.imageName == nil{
+//                    Image(systemName: "photo.fill")
+//                        .resizable()
+//                        .scaledToFill()
+//                        .frame(width:UIScreen.main.bounds.width)
+//                        .clipped()
+//                }else{
                 imageSection
                     .shadow(color: Color.black.opacity(0.3),
                             radius: 20,x:0,y:10)
-                }
+//                }
                 VStack(alignment: .leading, spacing: 16){
                     
                     titleSection
@@ -59,13 +59,15 @@ extension LocationDetailView {
     
     private var imageSection :  some View{
         TabView{
-            ForEach(defect.imageName, id: \.self){
-                Image($0)
+//            ForEach(vm.fetchImage, id: \.self){ img in
+            if let image = defect.imageName{
+            Image(uiImage: image)
                     .resizable()
                     .scaledToFill()
                     .frame(width:UIScreen.main.bounds.width)
                     .clipped()
             }
+//            }
         }
         .frame(height:500)
         .tabViewStyle(PageTabViewStyle())
