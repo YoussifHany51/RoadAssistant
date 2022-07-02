@@ -11,8 +11,9 @@ import MapKit
 struct LocationView: View {
     
     @EnvironmentObject private var vm: DefectViewModel
-    
+    @ObservedObject var monitor = NetworkConnection()
     var body: some View {
+        if monitor.isConnected{
         NavigationView {
             ZStack{
                         Map(coordinateRegion: $vm.mapRegion,
@@ -40,7 +41,7 @@ struct LocationView: View {
                         
                         Spacer()
                         
-                        // perview section
+                        //MARK: perview section
                         ZStack{
                             ForEach(vm.defects){ defect in
                                 if  vm.mapLocation == defect {
@@ -53,11 +54,30 @@ struct LocationView: View {
                             }
                         }
                     }
+                if vm.isLoading{
+                    ZStack{
+                        Color(.systemBackground)
+                            .ignoresSafeArea()
+                            .opacity(0.7)
+                        VStack{
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle())
+                                .scaleEffect(3)
+                            Text("Loading")
+                                .foregroundColor(.primary)
+                                .font(.title)
+                                .padding()
+                        }
+                    }
+                }
                 }
                 .sheet(item: $vm.sheetLocation, onDismiss: nil){ defect in
                     LocationDetailView(defect: defect)
             }
                 .navigationBarHidden(true)
+        }
+        }else{
+           NoInternetView()
         }
     }
 }

@@ -7,14 +7,24 @@
 
 import SwiftUI
 
-struct NoInternetvIEW: View {
+struct NoInternetView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView{
+            VStack{
+                Image(systemName: "wifi.slash")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width:50,height: 50)
+                Text("No Internet Connection")
+                    .font(.headline)
+            }
+            .navigationBarHidden(true)
+        }
     }
 }
 
 struct NoInternetvIEW_Previews: PreviewProvider {
     static var previews: some View {
-        NoInternetvIEW()
+        NoInternetView()
     }
 }
