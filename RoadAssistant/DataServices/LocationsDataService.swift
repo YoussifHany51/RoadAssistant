@@ -15,9 +15,7 @@ class LocationsDataService {
         Defect(
             roadName: "26th july axis road",
             coordinates: CLLocationCoordinate2D(latitude:30.00908 , longitude:30.98528),
-            imageName: [
-             "pothole1"
-            ]
+            imageName: UIImage(named: "crack1")!
         ),
         
 //        Defect(
