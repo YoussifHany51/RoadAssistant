@@ -14,7 +14,7 @@ struct Defect : Identifiable , Equatable, Codable{
     var id = UUID().uuidString
     var roadName : String = ""
     var coordinates : CLLocationCoordinate2D = CLLocationCoordinate2D(latitude:0 , longitude:0)
-    var imageName : [String] = []
+    var imageName : UIImage = UIImage()
     
     private enum CodingKeys: String, CodingKey {
         case roadName,coordinates,imageName,latitude,longitude
@@ -24,7 +24,7 @@ struct Defect : Identifiable , Equatable, Codable{
     static func == (lhs: Defect, rhs: Defect) -> Bool {
         lhs.id == rhs.id
     }
-    init(roadName:String,coordinates:CLLocationCoordinate2D,imageName:[String]) {
+    init(roadName:String,coordinates:CLLocationCoordinate2D,imageName:UIImage) {
         
         self.roadName = roadName
         self.coordinates = coordinates
@@ -34,11 +34,9 @@ struct Defect : Identifiable , Equatable, Codable{
     
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-//        id = try values.decode(String.self,forKey: .id)
         roadName = try values.decode(String.self,forKey: .roadName)
         coordinates.latitude = CLLocationDegrees(try values.decode(Double.self,forKey: .latitude))
         coordinates.longitude = CLLocationDegrees(try values.decode(Double.self,forKey: .longitude))
-        imageName = try values.decode([String].self,forKey: .imageName)
     }
   
     

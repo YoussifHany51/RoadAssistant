@@ -33,7 +33,7 @@ class DefectViewModel: ObservableObject {
     @Published var reportLocationBTPressed = false
     @Published var appError: MyImageError.ErrorType?
     @Published var fetchImage = [UIImage]()
-    @Published var fetchedDefect : Defect? = nil
+    @Published var isLoading = false
     
     func reset(){
         image = nil
@@ -87,8 +87,8 @@ class DefectViewModel: ObservableObject {
         self.defects = defects
         self.mapLocation = defects.first!
         self.updateMapRegion(defect: defects.first!)
-        fetchDefects()
-        retrieveDefectImage()
+        self.fetchDefects()
+        self.retrieveDefectImage()
     }
     
     private func updateMapRegion(defect:Defect){
@@ -128,24 +128,8 @@ class DefectViewModel: ObservableObject {
     }
     //   MARK: Firebase DB
     
-    func convertUIImageToString (image: UIImage) -> [String] {
-        
-        var imageAsData: Data = image.pngData()!
-        var imageAsInt: Int = 0 // initialize
-        
-        let data = NSData(bytes: &imageAsData, length: MemoryLayout<Int>.size)
-        data.getBytes(&imageAsInt, length: MemoryLayout<Int>.size)
-        
-        let imageAsString: String = String (imageAsInt)
-        
-        var res:[String] = []
-        res.append(imageAsString)
-        
-        return res
-        
-    }
     var ref : DatabaseReference! = Database.database().reference()
-    var number = 0;
+
     func pushReport(roadName:String,coordinates:CLLocationCoordinate2D){
         
         let latitude = coordinates.latitude
@@ -219,9 +203,9 @@ class DefectViewModel: ObservableObject {
                             
                             if let image = UIImage(data: data!) {
                                 
-                                DispatchQueue.main.async {
+//                                DispatchQueue.main.async {
                                     self.fetchImage.append(image)
-                                }
+//                                }
                             }
                         }
                     }
@@ -233,6 +217,7 @@ class DefectViewModel: ObservableObject {
     }
     
     func fetchDefects(){
+        self.isLoading = true
         self.ref.child("Defect").observe(.value) { snapshot in
             guard let value = snapshot.value else {return}
             
@@ -244,19 +229,22 @@ class DefectViewModel: ObservableObject {
                 print(model)
                 let arrayOfKeys = Array(model.keys.map{ $0 })
                 print(arrayOfKeys) // [1, 2, 3]
-                let arrayOfValues = Array(model.values.map{ $0 })
+                var arrayOfValues = Array(model.values.map{ $0 })
                 print(arrayOfValues)
                 
-                for var item in arrayOfValues{
-                    print(item)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5){
+                print("Items")
+                    for item in (0..<self.fetchImage.count){
+                    print(arrayOfValues[item])
                     
-                    for image in self.fetchImage {
-                     let img = self.convertUIImageToString(image: image)
-                    
-                    item.imageName = img
-                    }
-                    
-                    self.defects.append(item)
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 5){
+                    arrayOfValues[item].imageName = self.fetchImage[item]
+                        print("Image Attached")
+                    self.defects.append(arrayOfValues[item])
+                    self.isLoading = false
+//                    }
+                }
                 }
             } catch let error {
                 print(error)
